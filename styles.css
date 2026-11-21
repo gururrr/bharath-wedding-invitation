@@ -1,0 +1,1398 @@
+/* ==========================================================================
+   BHARATH & MADHUSHRI — WEDDING INVITATION STYLESHEET
+   Aesthetic: Blush Rose, Royal Deep Berry, Champagne Gold & Sage Eucalyptus
+   ========================================================================== */
+
+:root {
+  --ivory: #fffdfb;
+  --blush: #fdf6f6;
+  --blush-alt: #f9ecee;
+  --blush-glow: rgba(244, 194, 194, 0.35);
+  --rose: #c88ea7;
+  --rose-deep: #a86d87;
+  --rose-light: #f4c2c2;
+  --berry: #633740;
+  --berry-dark: #4a2830;
+  --berry-light: #7d4e57;
+  --sage: #8fa89b;
+  --sage-dark: #6f8c7e;
+  --gold: #d9c39a;
+  --gold-light: #f7e7ce;
+  --gold-dark: #bfa274;
+  --muted: #7a5c61;
+  --text-dark: #4f2d34;
+
+  --font-script: "Allura", cursive, Georgia, serif;
+  --font-serif-display: "Playfair Display", Georgia, serif;
+  --font-serif-body: "Cormorant Garamond", Georgia, serif;
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --shadow-card: 0 20px 60px rgba(99, 55, 64, 0.12), 0 4px 16px rgba(99, 55, 64, 0.05);
+  --shadow-modal: 0 30px 90px rgba(74, 40, 48, 0.38), 0 8px 24px rgba(74, 40, 48, 0.18);
+  --radius-card: 32px;
+  --radius-pill: 9999px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--berry);
+  font-family: var(--font-serif-body);
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.98) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(244, 194, 194, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 15% 75%, rgba(217, 195, 154, 0.2) 0%, transparent 45%),
+    linear-gradient(145deg, #fdf9f8 0%, #f9eded 45%, #fdf8f4 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--blush);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rose);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose-deep);
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   1. ENTRY SPLASH CURTAIN
+   ========================================================================== */
+#splash-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(200, 142, 167, 0.28) 0%, transparent 35%),
+    radial-gradient(circle at 20% 20%, rgba(217, 195, 154, 0.15) 0%, transparent 40%),
+    linear-gradient(135deg, #5b313a 0%, #7d4e57 50%, #44252c 100%);
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 1.05s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1.05s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 1.05s;
+}
+
+#splash-curtain.curtain-open {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.splash-filigree-frame {
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(217, 195, 154, 0.35);
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+.filigree-corner {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  color: var(--gold);
+  opacity: 0.75;
+}
+.filigree-corner.top-left { top: 12px; left: 12px; }
+.filigree-corner.top-right { top: 12px; right: 12px; transform: scaleX(-1); }
+.filigree-corner.bottom-left { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.filigree-corner.bottom-right { bottom: 12px; right: 12px; transform: scale(-1); }
+
+.splash-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 32px 24px;
+  max-width: 90vw;
+  animation: splashPulse 3s ease-in-out infinite;
+}
+
+@keyframes splashPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.splash-butterfly-wrap {
+  margin-bottom: 12px;
+}
+.splash-butterfly {
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+  animation: floatButterfly 3.2s ease-in-out infinite;
+}
+
+@keyframes floatButterfly {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-9px) rotate(4deg); }
+}
+
+.splash-names {
+  margin: 0 0 10px;
+  font-family: var(--font-serif-display);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: clamp(12px, 3.2vw, 15px);
+  color: var(--gold-light);
+  font-weight: 500;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.splash-title {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(56px, 13vw, 98px);
+  font-weight: 400;
+  line-height: 1;
+  color: #fff9fa;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.splash-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+.splash-subtitle .sub-line {
+  width: 44px;
+  height: 1px;
+  background: rgba(217, 195, 154, 0.65);
+}
+.splash-subtitle em {
+  font-family: var(--font-serif-body);
+  font-style: italic;
+  font-size: clamp(15px, 3.8vw, 18px);
+  color: #fdecef;
+  letter-spacing: 0.04em;
+}
+
+.splash-tap-badge {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 8px 22px;
+  border: 1px solid rgba(217, 195, 154, 0.5);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  animation: glowBadge 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes glowBadge {
+  0% { box-shadow: 0 0 8px rgba(217, 195, 154, 0.2); }
+  100% { box-shadow: 0 0 20px rgba(217, 195, 154, 0.6); }
+}
+
+/* ==========================================================================
+   2. CANVAS: PETALS & CELEBRATION
+   ========================================================================== */
+#petal-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. CORNER BOTANICAL FLORALS
+   ========================================================================== */
+.corner-floral {
+  position: fixed;
+  top: 0;
+  z-index: 8;
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+.corner-floral-left {
+  left: 0;
+}
+.corner-floral-right {
+  right: 0;
+}
+
+.butterfly-flight {
+  animation: flutter 4s ease-in-out infinite;
+}
+@keyframes flutter {
+  0%, 100% { transform: translate(152px, 112px) rotate(-18deg); }
+  50% { transform: translate(156px, 106px) rotate(-12deg); }
+}
+
+/* ==========================================================================
+   4. FLOATING TOP UTILITY BAR
+   ========================================================================== */
+.utility-bar {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.utility-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid rgba(200, 142, 167, 0.45);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  color: var(--berry);
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(99, 55, 64, 0.08);
+  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.utility-pill:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(99, 55, 64, 0.16);
+}
+
+/* Animated Sound Wave Equalizer */
+.sound-wave-anim {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.sound-wave-anim.playing {
+  display: inline-flex;
+}
+.sound-wave-anim span {
+  width: 2px;
+  background: var(--rose-deep);
+  border-radius: 1px;
+  animation: soundBars 1s ease-in-out infinite;
+}
+.sound-wave-anim span:nth-child(1) { height: 4px; animation-delay: 0.1s; }
+.sound-wave-anim span:nth-child(2) { height: 11px; animation-delay: 0.3s; }
+.sound-wave-anim span:nth-child(3) { height: 7px; animation-delay: 0.2s; }
+.sound-wave-anim span:nth-child(4) { height: 9px; animation-delay: 0.4s; }
+
+@keyframes soundBars {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+/* ==========================================================================
+   5. MAIN CONTENT & ROYAL INVITATION CARD
+   ========================================================================== */
+.page-content {
+  position: relative;
+  z-index: 25;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 85px 20px 36px;
+}
+
+.invitation-card {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 52px 48px 44px;
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 195, 154, 0.85);
+  box-shadow: var(--shadow-card), inset 0 0 45px rgba(253, 246, 246, 0.85);
+  position: relative;
+}
+
+/* Dual hairline inner frame */
+.invitation-card::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(200, 142, 167, 0.35);
+  border-radius: calc(var(--radius-card) - 10px);
+  pointer-events: none;
+}
+
+/* Top Ornament Divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.gold-line {
+  height: 1px;
+  width: 48px;
+}
+.gold-line.left {
+  background: linear-gradient(to right, transparent, var(--rose));
+}
+.gold-line.right {
+  background: linear-gradient(to left, transparent, var(--rose));
+}
+.star-motif {
+  width: 18px;
+  height: 18px;
+  color: var(--gold-dark);
+}
+
+/* Auspicious Invocation Header */
+.auspicious-invocation {
+  margin-bottom: 22px;
+}
+.ganesha-emblem {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 6px;
+  display: block;
+}
+.sanskrit-chant {
+  margin: 0 0 5px;
+  font-family: var(--font-serif-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--rose-deep);
+  letter-spacing: 0.15em;
+}
+.blessing-header {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-serif-display);
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* Couple Names */
+.couple-names {
+  margin: 18px 0 20px;
+}
+.couple-names h2, .name-groom, .name-bride {
+  margin: 4px 0;
+  font-family: var(--font-script);
+  font-size: clamp(48px, 9.5vw, 74px);
+  line-height: 1.05;
+  font-weight: 400;
+  color: var(--berry);
+  text-shadow: 0 2px 8px rgba(99, 55, 64, 0.08);
+}
+.couple-ampersand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: -2px 0;
+}
+.amp-line {
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.amp-symbol {
+  color: var(--rose);
+  font-family: var(--font-script);
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Invitation Copy & Romantic Taglines */
+.invitation-copy {
+  margin: 22px 0 28px;
+}
+.honour-line {
+  margin: 0 0 5px;
+  font-family: var(--font-serif-display);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--berry);
+}
+.celebration-sub {
+  margin: 0 0 12px;
+  font-family: var(--font-serif-body);
+  font-size: 20px;
+  color: var(--muted);
+}
+.romantic-tagline-box {
+  padding-top: 6px;
+}
+.tagline {
+  margin: 0 0 3px;
+  font-family: var(--font-serif-body);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--berry);
+}
+.tagline-small {
+  margin: 0;
+  font-family: var(--font-serif-body);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   EVENT CARDS (Reception & Muhurtham)
+   ========================================================================== */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin: 32px 0 28px;
+}
+
+.event-card {
+  min-height: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 14px 18px;
+  border: 1px solid rgba(217, 195, 154, 0.45);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #633740 0%, #7d4e57 60%, #542d35 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(99, 55, 64, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(99, 55, 64, 0.28);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.event-badge-icon {
+  font-size: 20px;
+}
+.event-card h3 {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  color: #fff8fa;
+}
+
+.event-divider {
+  width: 44px;
+  height: 1px;
+  margin: 10px 0;
+  background: rgba(217, 195, 154, 0.6);
+}
+
+.event-day {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold-light);
+}
+.event-date {
+  margin: 4px 0 2px;
+  font-family: var(--font-serif-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+.event-time {
+  margin: 4px 0 12px;
+  font-family: var(--font-serif-body);
+  font-size: 15px;
+  color: #f7e7ce;
+}
+
+.btn-event-cal {
+  border: 1px solid rgba(217, 195, 154, 0.4);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--gold-light);
+  font-family: var(--font-ui);
+  font-size: 10.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-event-cal:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Celebration Venue Block */
+.venue-block {
+  padding-top: 22px;
+  border-top: 1px solid rgba(200, 142, 167, 0.28);
+}
+.venue-label {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-family: var(--font-serif-display);
+  letter-spacing: 0.24em;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+.venue-name {
+  margin: 0 0 4px;
+  font-family: var(--font-serif-display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--berry);
+}
+.venue-pin {
+  color: var(--rose-deep);
+  margin-right: 2px;
+}
+.venue-address {
+  margin: 0 0 8px;
+  font-family: var(--font-serif-body);
+  font-size: 16px;
+  color: var(--muted);
+}
+.venue-maps-inline {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--rose-deep);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border-bottom: 1px dashed var(--rose);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.venue-maps-inline:hover {
+  color: var(--berry);
+}
+
+/* ==========================================================================
+   6. LUXURY WEDDING COUNTDOWN TIMER
+   ========================================================================== */
+.countdown-section {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin: 28px 0 10px;
+}
+.countdown-kicker {
+  margin: 0 0 12px;
+  font-family: var(--font-serif-display);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+}
+.countdown-boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.cd-box {
+  flex: 1;
+  max-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  border: 1px solid rgba(217, 195, 154, 0.5);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(99, 55, 64, 0.08);
+  transition: transform 0.2s ease;
+}
+.cd-box:hover {
+  transform: translateY(-2px);
+}
+.cd-num {
+  font-family: var(--font-serif-display);
+  font-size: clamp(24px, 5.5vw, 32px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--berry);
+}
+.cd-lbl {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.cd-sep {
+  font-family: var(--font-serif-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--rose);
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   7. INTERACTIVE ACTION HUB
+   ========================================================================== */
+.post-card-actions {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-top: 18px;
+}
+
+/* Blessing Pill */
+.blessing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  border: 1px solid rgba(200, 142, 167, 0.35);
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  color: var(--berry);
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(99, 55, 64, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.blessing-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 55, 64, 0.16);
+}
+.blessing-icon {
+  font-size: 20px;
+  animation: pulseRotate 3s infinite ease-in-out;
+}
+@keyframes pulseRotate {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50% { transform: scale(1.15) rotate(12deg); }
+}
+.blessing-cta-text {
+  font-family: var(--font-serif-body);
+  font-size: 17px;
+  font-weight: 500;
+}
+.blessing-pill b {
+  border: 1px solid rgba(200, 142, 167, 0.45);
+  border-radius: var(--radius-pill);
+  padding: 3px 9px;
+  background: var(--blush);
+  color: var(--berry-light);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dinner-note {
+  margin: 18px 0;
+  font-family: var(--font-script);
+  color: var(--berry);
+  font-size: 36px;
+  font-weight: 400;
+}
+
+/* 4 Action Buttons Grid */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(217, 195, 154, 0.4);
+  border-radius: var(--radius-pill);
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #633740 0%, #7d4e57 100%);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-serif-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(99, 55, 64, 0.14);
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+.cta-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(99, 55, 64, 0.24);
+  background: linear-gradient(135deg, #522d35 0%, #6e424a 100%);
+}
+
+.cta-whatsapp {
+  background: linear-gradient(135deg, #4f343b 0%, #2f634b 100%);
+  border-color: rgba(143, 168, 155, 0.5);
+}
+.cta-whatsapp:hover {
+  background: linear-gradient(135deg, #3d262c 0%, #25523d 100%);
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+footer {
+  position: relative;
+  z-index: 25;
+  text-align: center;
+  padding: 24px 20px 38px;
+}
+.footer-primary {
+  margin: 0 0 5px;
+  font-family: var(--font-serif-body);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--berry);
+}
+.footer-sub {
+  margin: 0 0 12px;
+  font-family: var(--font-serif-body);
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--muted);
+}
+.footer-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--rose);
+}
+.footer-divider span {
+  width: 32px;
+  height: 1px;
+  background: rgba(200, 142, 167, 0.4);
+}
+.footer-blessing {
+  margin: 0;
+  font-family: var(--font-serif-body);
+  font-size: 15px;
+  color: var(--berry);
+}
+.footer-blessing b {
+  color: var(--rose-deep);
+}
+
+/* ==========================================================================
+   9. MODALS
+   ========================================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(68, 37, 44, 0.65);
+  backdrop-filter: blur(8px);
+}
+
+.modal-panel {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  border: 1px solid rgba(217, 195, 154, 0.7);
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+  animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(200, 142, 167, 0.4);
+  border-radius: 50%;
+  background: rgba(253, 246, 246, 0.9);
+  color: var(--berry);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: var(--rose-light);
+}
+
+/* Poster Modal */
+.poster-panel {
+  max-width: 540px;
+  padding: 22px;
+  background: var(--blush);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200, 142, 167, 0.3);
+}
+.modal-kicker {
+  margin: 0;
+  color: var(--rose-deep);
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 9.5px;
+  font-weight: 600;
+}
+.modal-header h3 {
+  margin: 3px 0 0;
+  font-family: var(--font-serif-display);
+  font-size: 19px;
+  color: var(--berry);
+}
+.poster-canvas-wrap {
+  background: #ffffff;
+  border: 1px solid rgba(217, 195, 154, 0.6);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.poster-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+.poster-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.modal-action-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s, background 0.2s;
+}
+.modal-action-btn.primary {
+  border: 0;
+  background: var(--berry);
+  color: #ffffff;
+}
+.modal-action-btn.primary:hover {
+  background: var(--berry-dark);
+}
+.modal-action-btn.secondary {
+  border: 1px solid rgba(200, 142, 167, 0.45);
+  background: #ffffff;
+  color: var(--berry);
+}
+
+/* Venue Modal */
+.venue-panel {
+  max-width: 460px;
+  padding: 30px 24px;
+  text-align: center;
+}
+.venue-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+.venue-modal-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 142, 167, 0.4);
+  background: var(--blush);
+  font-size: 24px;
+}
+.venue-modal-kicker {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-serif-display);
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  font-weight: 600;
+}
+.venue-panel h3 {
+  margin: 6px 0 4px;
+  font-family: var(--font-serif-display);
+  font-size: 23px;
+  color: var(--berry);
+}
+.venue-modal-schedule {
+  margin: 0 0 16px;
+  font-family: var(--font-serif-body);
+  font-size: 15px;
+  color: var(--muted);
+}
+.venue-address-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 14px;
+  border: 1px solid rgba(200, 142, 167, 0.3);
+  border-radius: 14px;
+  background: var(--blush);
+  text-align: left;
+}
+.venue-addr-icon {
+  font-size: 22px;
+  margin-top: 2px;
+}
+.venue-addr-text strong {
+  display: block;
+  font-family: var(--font-serif-display);
+  font-size: 15px;
+  color: var(--berry);
+}
+.venue-addr-text p {
+  margin: 3px 0 0;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.venue-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.btn-venue-action {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid rgba(200, 142, 167, 0.5);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  color: var(--berry);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-venue-action.primary {
+  background: var(--berry);
+  color: #ffffff;
+  border-color: var(--berry);
+}
+.copy-toast {
+  margin-top: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  color: #437a62;
+}
+
+/* Blessing Guestbook Modal */
+.blessing-panel {
+  max-width: 480px;
+  padding: 28px 24px;
+}
+.blessing-modal-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.blessing-flower-icon {
+  font-size: 30px;
+}
+.blessing-modal-header h3 {
+  margin: 4px 0 2px;
+  font-family: var(--font-script);
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--berry);
+}
+.blessing-modal-header p {
+  margin: 0;
+  font-family: var(--font-serif-body);
+  font-size: 16px;
+  color: var(--muted);
+}
+#blessing-form {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.form-group {
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--berry);
+  margin-bottom: 4px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid rgba(200, 142, 167, 0.4);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--blush);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--berry);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--berry);
+  background: #ffffff;
+}
+.btn-submit-blessing {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 12px;
+  background: linear-gradient(135deg, #633740, #7d4e57);
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-submit-blessing:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(99, 55, 64, 0.2);
+}
+.blessing-toast {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  background: #f0f7f3;
+  border: 1px solid rgba(47, 99, 75, 0.3);
+  color: #2f634b;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+  animation: modalPop 0.25s ease;
+}
+.blessing-toast.hidden {
+  display: none;
+}
+.blessing-feed-header {
+  border-top: 1px solid rgba(200, 142, 167, 0.25);
+  padding-top: 12px;
+  margin-bottom: 8px;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.blessing-list {
+  max-height: 180px;
+  overflow-y: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+}
+.blessing-item {
+  padding: 10px 12px;
+  border: 1px solid rgba(200, 142, 167, 0.25);
+  border-radius: 12px;
+  background: var(--blush);
+}
+.blessing-item strong {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--berry);
+}
+.blessing-item span {
+  font-family: var(--font-serif-body);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* Calendar Modal */
+.calendar-panel {
+  max-width: 460px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.cal-modal-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+.calendar-panel h3 {
+  margin: 4px 0 2px;
+  font-family: var(--font-serif-display);
+  font-size: 22px;
+  color: var(--berry);
+}
+.cal-modal-desc {
+  margin: 0 0 18px;
+  font-family: var(--font-serif-body);
+  font-size: 15px;
+  color: var(--muted);
+}
+.cal-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cal-event-item {
+  border: 1px solid rgba(200, 142, 167, 0.35);
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--blush);
+  text-align: left;
+}
+.cal-item-info strong {
+  display: block;
+  font-family: var(--font-serif-display);
+  font-size: 17px;
+  color: var(--berry);
+}
+.cal-item-info span {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--muted);
+}
+.cal-item-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.btn-cal-choice {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid rgba(200, 142, 167, 0.45);
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  color: var(--berry);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-cal-choice:hover {
+  background: var(--blush-alt);
+}
+
+/* ==========================================================================
+   10. RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 700px) {
+  .corner-floral {
+    width: 140px;
+    height: 140px;
+    opacity: 0.6;
+  }
+  .utility-bar {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+  .utility-pill {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  #audio-label {
+    display: none;
+  }
+  .page-content {
+    padding: 65px 14px 24px;
+  }
+  .invitation-card {
+    padding: 38px 20px 30px;
+    border-radius: 24px;
+  }
+  .invitation-card::after {
+    inset: 8px;
+    border-radius: 16px;
+  }
+  .blessing-header {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .couple-names h2, .name-groom, .name-bride {
+    font-size: 50px;
+  }
+  .couple-ampersand .amp-symbol {
+    font-size: 36px;
+  }
+  .event-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 24px 0 20px;
+  }
+  .event-card {
+    min-height: 140px;
+    padding: 18px 12px;
+  }
+  .action-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .blessing-pill {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dinner-note {
+    font-size: 30px;
+    margin: 14px 0;
+  }
+  .countdown-boxes {
+    gap: 6px;
+  }
+  .cd-box {
+    padding: 10px 4px;
+  }
+  .cd-num {
+    font-size: 22px;
+  }
+  .cd-lbl {
+    font-size: 9px;
+  }
+  .cd-sep {
+    font-size: 18px;
+  }
+  .poster-panel {
+    padding: 14px;
+  }
+  .venue-modal-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .couple-names h2, .name-groom, .name-bride {
+    font-size: 42px;
+  }
+  .splash-names {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
