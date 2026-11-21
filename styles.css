@@ -426,28 +426,30 @@ button, a {
 .couple-names h2, .name-groom, .name-bride {
   margin: 4px 0;
   font-family: var(--font-script);
-  font-size: clamp(48px, 9.5vw, 74px);
-  line-height: 1.05;
+  font-size: clamp(44px, 9vw, 72px);
+  line-height: 1.18;
   font-weight: 400;
   color: var(--berry);
   text-shadow: 0 2px 8px rgba(99, 55, 64, 0.08);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .couple-ampersand {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin: -2px 0;
+  gap: 14px;
+  margin: 2px 0;
 }
 .amp-line {
-  width: 32px;
+  width: clamp(20px, 6vw, 32px);
   height: 1px;
   background: var(--gold);
 }
 .amp-symbol {
   color: var(--rose);
   font-family: var(--font-script);
-  font-size: 46px;
+  font-size: clamp(34px, 8vw, 46px);
   font-weight: 400;
   line-height: 1;
 }
@@ -864,9 +866,12 @@ footer {
   position: fixed;
   inset: 0;
   z-index: 95;
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .modal.hidden {
   display: none !important;
@@ -883,11 +888,15 @@ footer {
   position: relative;
   z-index: 10;
   width: 100%;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
   border: 1px solid rgba(217, 195, 154, 0.7);
   border-radius: 24px;
   background: #ffffff;
   box-shadow: var(--shadow-modal);
   overflow: hidden;
+  margin: auto;
   animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -916,17 +925,18 @@ footer {
 
 /* Poster Modal */
 .poster-panel {
-  max-width: 540px;
-  padding: 22px;
+  max-width: 480px;
+  padding: 18px 20px 20px;
   background: var(--blush);
 }
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
   border-bottom: 1px solid rgba(200, 142, 167, 0.3);
+  flex-shrink: 0;
 }
 .modal-kicker {
   margin: 0;
@@ -949,19 +959,29 @@ footer {
   border-radius: 16px;
   padding: 8px;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-height: min(60vh, 520px);
+  flex: 1;
 }
 .poster-canvas-wrap canvas {
   display: block;
-  width: 100%;
-  max-width: 360px;
+  width: auto;
+  max-width: 100%;
+  max-height: min(58vh, 500px);
   height: auto;
   margin: 0 auto;
   border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 4px 16px rgba(99, 55, 64, 0.1);
 }
 .poster-actions {
   display: flex;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 14px;
+  flex-shrink: 0;
 }
 .modal-action-btn {
   flex: 1;
@@ -1300,9 +1320,9 @@ footer {
    ========================================================================== */
 @media (max-width: 700px) {
   .corner-floral {
-    width: 140px;
-    height: 140px;
-    opacity: 0.6;
+    width: 90px;
+    height: 90px;
+    opacity: 0.35;
   }
   .utility-bar {
     top: 8px;
@@ -1320,7 +1340,7 @@ footer {
     padding: 65px 14px 24px;
   }
   .invitation-card {
-    padding: 38px 20px 30px;
+    padding: 36px 18px 28px;
     border-radius: 24px;
   }
   .invitation-card::after {
@@ -1332,10 +1352,11 @@ footer {
     letter-spacing: 0.18em;
   }
   .couple-names h2, .name-groom, .name-bride {
-    font-size: 50px;
+    font-size: clamp(36px, 8.8vw, 48px);
+    line-height: 1.18;
   }
   .couple-ampersand .amp-symbol {
-    font-size: 36px;
+    font-size: 34px;
   }
   .event-grid {
     grid-template-columns: 1fr;
@@ -1345,6 +1366,9 @@ footer {
   .event-card {
     min-height: 140px;
     padding: 18px 12px;
+  }
+  .event-card-header {
+    justify-content: center;
   }
   .action-grid {
     grid-template-columns: 1fr;
@@ -1356,7 +1380,7 @@ footer {
     justify-content: center;
   }
   .dinner-note {
-    font-size: 30px;
+    font-size: 28px;
     margin: 14px 0;
   }
   .countdown-boxes {
@@ -1375,20 +1399,98 @@ footer {
     font-size: 18px;
   }
   .poster-panel {
-    padding: 14px;
+    padding: 14px 12px;
+  }
+  .poster-actions {
+    flex-direction: column;
+    gap: 8px;
   }
   .venue-modal-actions {
     flex-direction: column;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+  .page-content {
+    padding: 58px 10px 24px;
+  }
+  .invitation-card {
+    padding: 30px 14px 24px;
+    border-radius: 20px;
+  }
+  .invitation-card::after {
+    inset: 6px;
+    border-radius: 14px;
+  }
+  .honour-line {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+  .celebration-sub {
+    font-size: 17px;
+  }
+  .tagline {
+    font-size: 16px;
+  }
+  .tagline-small {
+    font-size: 13.5px;
+  }
+  .event-card {
+    padding: 16px 10px;
+  }
+  .event-card h3 {
+    font-size: 34px;
+  }
+  .countdown-boxes {
+    gap: 4px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .cd-box {
+    padding: 8px 3px;
+    border-radius: 12px;
+    min-width: 0;
+  }
+  .cd-num {
+    font-size: 19px;
+  }
+  .cd-lbl {
+    font-size: 8.5px;
+  }
+  .cd-sep {
+    font-size: 15px;
+    margin: 0 1px;
+  }
+  .blessing-pill {
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+  .blessing-cta-text {
+    font-size: 11px;
+  }
+  .corner-floral {
+    width: 65px;
+    height: 65px;
+    opacity: 0.22;
+  }
+}
+
+@media (max-width: 380px) {
   .couple-names h2, .name-groom, .name-bride {
-    font-size: 42px;
+    font-size: 34px;
   }
   .splash-names {
     font-size: 11px;
     letter-spacing: 0.2em;
+  }
+  .sanskrit-chant {
+    font-size: 11.5px;
+  }
+  .blessing-header {
+    font-size: 9px;
+    letter-spacing: 0.12em;
   }
 }
 

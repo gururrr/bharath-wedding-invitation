@@ -556,12 +556,34 @@
   // ----------------------------------------------------------------------------
   // 9. High-Resolution "Save the Date" Canvas Poster Generator
   // ----------------------------------------------------------------------------
+  const ganeshaPosterImg = new Image();
+  ganeshaPosterImg.src = "assets/img/ganesha-emblem.png";
+  ganeshaPosterImg.onload = function () {
+    drawSaveTheDatePoster();
+  };
+
   function drawSaveTheDatePoster() {
     const poster = document.getElementById("poster-canvas");
     if (!poster) return;
     const ctx = poster.getContext("2d");
     const W = poster.width;
     const H = poster.height;
+
+    // Helper: auto-scale text to fit within max allowable width
+    function drawFittedText(text, x, y, maxW, baseSize, fontFam, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      let size = baseSize;
+      ctx.font = size + "px " + fontFam;
+      let measured = ctx.measureText(text).width;
+      while (measured > maxW && size > 22) {
+        size -= 2;
+        ctx.font = size + "px " + fontFam;
+        measured = ctx.measureText(text).width;
+      }
+      ctx.fillText(text, x, y);
+      ctx.restore();
+    }
 
     // Background Gradient (Radiant Warm Ivory to Soft Blush)
     const bgGrad = ctx.createRadialGradient(W / 2, H / 2, 60, W / 2, H / 2, H * 0.72);
@@ -581,10 +603,51 @@
     ctx.lineWidth = 1.6;
     ctx.strokeRect(52, 52, W - 104, H - 104);
 
-    // Botanical Garland Circle around Couple Names
+    // Subtle Corner Filigree Accents
+    ctx.strokeStyle = "#D9C39A";
+    ctx.lineWidth = 1.2;
+    const corners = [
+      { x: 58, y: 58, dx: 1, dy: 1 },
+      { x: W - 58, y: 58, dx: -1, dy: 1 },
+      { x: 58, y: H - 58, dx: 1, dy: -1 },
+      { x: W - 58, y: H - 58, dx: -1, dy: -1 }
+    ];
+    corners.forEach(function (c) {
+      ctx.beginPath();
+      ctx.moveTo(c.x, c.y + c.dy * 26);
+      ctx.lineTo(c.x, c.y);
+      ctx.lineTo(c.x + c.dx * 26, c.y);
+      ctx.stroke();
+    });
+
     const cx = W / 2;
-    const cy = 520;
-    const r = 210;
+
+    // Header 1: Ganesha Emblem
+    if (ganeshaPosterImg.complete && ganeshaPosterImg.naturalWidth > 0) {
+      const gw = 66;
+      const gh = (ganeshaPosterImg.naturalHeight / ganeshaPosterImg.naturalWidth) * gw;
+      ctx.drawImage(ganeshaPosterImg, cx - gw / 2, 74, gw, gh);
+    }
+
+    // Header 2: Auspicious Sanskrit Chant
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#A86D87";
+    ctx.font = "600 18px 'Playfair Display', Georgia, serif";
+    ctx.fillText("॥ ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ ॥", cx, 168);
+
+    // Header 3: Blessing Line
+    ctx.fillStyle = "#7A5C61";
+    ctx.font = "600 17px 'Playfair Display', Georgia, serif";
+    ctx.fillText("WITH THE BLESSINGS OF OUR FAMILIES", cx, 202);
+
+    // Header 4: SAVE THE DATE
+    ctx.fillStyle = "#633740";
+    ctx.font = "700 38px 'Playfair Display', Georgia, serif";
+    ctx.fillText("SAVE THE DATE", cx, 252);
+
+    // Botanical Garland Circle around Couple Names
+    const cy = 495;
+    const r = 195;
 
     ctx.save();
     ctx.strokeStyle = "#8FA89B";
@@ -597,7 +660,7 @@
     ctx.lineWidth = 1.2;
     ctx.setLineDash([6, 6]);
     ctx.beginPath();
-    ctx.arc(cx, cy, r + 14, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r + 13, 0, Math.PI * 2);
     ctx.stroke();
     ctx.setLineDash([]);
 
@@ -611,7 +674,7 @@
       ctx.rotate(theta + Math.PI / 2);
       ctx.fillStyle = a % 2 === 0 ? "#8FA89B" : "#A8C0B4";
       ctx.beginPath();
-      ctx.ellipse(0, -8, 6, 14, 0.35, 0, Math.PI * 2);
+      ctx.ellipse(0, -8, 5.5, 13, 0.35, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
@@ -623,92 +686,85 @@
       const ry = cy + Math.sin(ang) * r;
       ctx.fillStyle = "#E8A5B8";
       ctx.beginPath();
-      ctx.arc(rx, ry, 20, 0, Math.PI * 2);
+      ctx.arc(rx, ry, 18, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = "#F4C2C2";
       ctx.beginPath();
-      ctx.arc(rx - 2, ry - 2, 12, 0, Math.PI * 2);
+      ctx.arc(rx - 2, ry - 2, 11, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = "#D9C39A";
       ctx.beginPath();
-      ctx.arc(rx, ry, 5, 0, Math.PI * 2);
+      ctx.arc(rx, ry, 4.5, 0, Math.PI * 2);
       ctx.fill();
     });
     ctx.restore();
 
-    // Invocation & Header
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#A86D87";
-    ctx.font = "600 20px 'Playfair Display', Georgia, serif";
-    ctx.fillText("॥ ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ ॥", cx, 145);
-
-    ctx.fillStyle = "#7A5C61";
-    ctx.font = "600 21px 'Playfair Display', Georgia, serif";
-    ctx.fillText("WITH THE BLESSINGS OF OUR FAMILIES", cx, 185);
-
-    ctx.fillStyle = "#633740";
-    ctx.font = "700 44px 'Playfair Display', Georgia, serif";
-    ctx.fillText("SAVE THE DATE", cx, 245);
-
-    // Couple Names inside Garland
-    ctx.fillStyle = "#633740";
-    ctx.font = "64px 'Allura', cursive, Georgia";
-    ctx.fillText(weddingState.groom, cx, cy - 40);
+    // Couple Names inside Garland (Harmoniously Centered & Auto-Fitted)
+    drawFittedText(weddingState.groom, cx, cy - 42, 330, 56, "'Allura', cursive, Georgia", "#633740");
 
     ctx.fillStyle = "#C88EA7";
-    ctx.font = "50px 'Allura', cursive, Georgia";
-    ctx.fillText("&", cx, cy + 15);
+    ctx.font = "42px 'Allura', cursive, Georgia";
+    ctx.fillText("&", cx, cy + 6);
 
-    ctx.fillStyle = "#633740";
-    ctx.font = "64px 'Allura', cursive, Georgia";
-    ctx.fillText(weddingState.bride, cx, cy + 76);
+    drawFittedText(weddingState.bride, cx, cy + 56, 330, 56, "'Allura', cursive, Georgia", "#633740");
 
-    // Formal Invitation Subtitle
+    // Formal Invitation Subtitle (Two Balanced Lines for Clean Mobile Alignment)
     ctx.fillStyle = "#7A5C61";
-    ctx.font = "italic 27px 'Cormorant Garamond', Georgia, serif";
-    ctx.fillText("Request the honour of your presence at their wedding celebrations", cx, 810);
+    ctx.font = "600 16px 'Playfair Display', Georgia, serif";
+    ctx.fillText("REQUEST THE HONOUR OF YOUR PRESENCE", cx, 745);
+
+    ctx.fillStyle = "#8C586B";
+    ctx.font = "italic 23px 'Cormorant Garamond', Georgia, serif";
+    ctx.fillText("at their wedding celebrations", cx, 778);
 
     // Event 1: Reception
     ctx.fillStyle = "#633740";
-    ctx.font = "700 26px 'Playfair Display', Georgia, serif";
-    ctx.fillText("RECEPTION: " + weddingState.receptionDateStr.toUpperCase(), cx, 890);
+    ctx.font = "700 24px 'Playfair Display', Georgia, serif";
+    ctx.fillText("RECEPTION: " + weddingState.receptionDateStr.toUpperCase(), cx, 842);
     ctx.fillStyle = "#7A5C61";
-    ctx.font = "24px 'Cormorant Garamond', Georgia, serif";
-    ctx.fillText(weddingState.receptionTimeStr, cx, 925);
+    ctx.font = "21px 'Cormorant Garamond', Georgia, serif";
+    ctx.fillText(weddingState.receptionTimeStr, cx, 874);
 
     // Event 2: Muhurtham
     ctx.fillStyle = "#633740";
-    ctx.font = "700 26px 'Playfair Display', Georgia, serif";
-    ctx.fillText("MUHURTHAM: " + weddingState.muhurthamDateStr.toUpperCase(), cx, 995);
+    ctx.font = "700 24px 'Playfair Display', Georgia, serif";
+    ctx.fillText("MUHURTHAM: " + weddingState.muhurthamDateStr.toUpperCase(), cx, 938);
     ctx.fillStyle = "#7A5C61";
-    ctx.font = "24px 'Cormorant Garamond', Georgia, serif";
-    ctx.fillText(weddingState.muhurthamTimeStr, cx, 1030);
+    ctx.font = "21px 'Cormorant Garamond', Georgia, serif";
+    ctx.fillText(weddingState.muhurthamTimeStr, cx, 970);
 
-    // Divider Line
+    // Elegant Divider Line
     ctx.strokeStyle = "#C88EA7";
-    ctx.lineWidth = 1.6;
+    ctx.lineWidth = 1.4;
     ctx.beginPath();
-    ctx.moveTo(cx - 140, 1080);
-    ctx.lineTo(cx + 140, 1080);
+    ctx.moveTo(cx - 120, 1018);
+    ctx.lineTo(cx + 120, 1018);
     ctx.stroke();
 
     // Venue Block
     ctx.fillStyle = "#7D4E57";
-    ctx.font = "700 22px 'Playfair Display', Georgia, serif";
-    ctx.fillText("VENUE", cx, 1125);
+    ctx.font = "700 18px 'Playfair Display', Georgia, serif";
+    ctx.fillText("VENUE", cx, 1058);
 
     ctx.fillStyle = "#633740";
-    ctx.font = "600 30px 'Cormorant Garamond', Georgia, serif";
-    ctx.fillText(weddingState.venueName + ", " + weddingState.venueCity, cx, 1165);
+    ctx.font = "600 27px 'Cormorant Garamond', Georgia, serif";
+    ctx.fillText(weddingState.venueName + ", " + weddingState.venueCity, cx, 1094);
 
     ctx.fillStyle = "#7A5C61";
-    ctx.font = "21px 'Cormorant Garamond', Georgia, serif";
-    ctx.fillText("Near Malappanahatti Circle, Chitradurga", cx, 1200);
+    ctx.font = "20px 'Cormorant Garamond', Georgia, serif";
+    ctx.fillText("Near Malappanahatti Circle, Chitradurga", cx, 1126);
 
     // Closing Note
     ctx.fillStyle = "#C88EA7";
-    ctx.font = "38px 'Allura', cursive, Georgia";
-    ctx.fillText("dinner & celebrations to follow ♥", cx, 1270);
+    ctx.font = "34px 'Allura', cursive, Georgia";
+    ctx.fillText("dinner & celebrations to follow ♥", cx, 1202);
+  }
+
+  // Automatic redraw once Google Fonts are rasterized by browser (vital on mobile)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      drawSaveTheDatePoster();
+    });
   }
 
   const btnViewPoster = document.getElementById("btn-view-poster");
