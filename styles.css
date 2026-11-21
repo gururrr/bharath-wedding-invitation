@@ -391,10 +391,15 @@ button, a {
   margin-bottom: 22px;
 }
 .ganesha-emblem {
-  width: 46px;
-  height: 46px;
-  margin: 0 auto 6px;
+  width: clamp(64px, 11vw, 80px);
+  height: auto;
+  margin: 0 auto 10px;
   display: block;
+  filter: drop-shadow(0 4px 12px rgba(184, 115, 51, 0.22));
+  transition: transform 0.3s ease;
+}
+.ganesha-emblem:hover {
+  transform: scale(1.05);
 }
 .sanskrit-chant {
   margin: 0 0 5px;
